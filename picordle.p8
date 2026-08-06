@@ -1,9 +1,10 @@
 pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
+#include playercontroller.lua
 #include helpers.lua
 #include words.lua
-#include tileset.lua
+#include board.lua
 #include main.lua
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

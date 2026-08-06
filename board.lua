@@ -2,7 +2,7 @@
 
 -- Create debug rects in the corners for clarity
 function debug_rects()
-    local size = 5
+    local size = 2
     rectfill(0, 0, size, size, 3)
     rectfill(127 - size, 0, 127, size, 3)
     rectfill(0, 127 - size, size, 127, 3)

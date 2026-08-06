@@ -34,12 +34,14 @@ end
 
 function _draw()
     debug_rects() -- Debugging
+    local results = {}
+    results[1] = validate_input(chosen_word, guesses[1])
     draw_board(
         default_tile_size,
         default_gap_size,
         word_length,
         num_tries,
         guesses,
-        validate_input(chosen_word, guesses[1]))
+        results)
 end
 
