@@ -25,17 +25,17 @@ function draw_board(
     gap_size,
     num_letters,
     num_tries,
-    rounds
+    guesses
     )
     -- Define top-left corner to start the letters (Half block + 2 blocks)
     local start_x = 128/2-(rect_size/2)-(2*rect_size)-(2*gap_size)
-    local start_y = 128/2-(rect_size/2)-(2*rect_size)-(2*gap_size)
+    local start_y = 128/3-(rect_size/2)-(2*rect_size)-(2*gap_size)
     local offset_y = 0
 
     -- For every vertical row
     for i=1, num_tries do
         local offset_x = 0
-        word = rounds[i] or {} -- Get word in this round if exists
+        word = guesses[i] or {} -- Get word in this round if exists
         -- Create 5 tiles horizontally
         for i=1, num_letters do
             letter = word[i] or '' -- Get letter or leave empty

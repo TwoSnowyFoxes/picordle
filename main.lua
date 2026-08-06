@@ -8,10 +8,29 @@ local default_tile_size = 10
 local default_gap_size = 2
 
 
--- Main to save rounds to
-local rounds = {}
+-- Make a table to save guesses to
+local guesses = {}
+-- Choose a word
+chosen_word = select_word()
 -- Add testround
-rounds[1] = {'T', 'A', 'B', 'L', 'E'}
+guesses[1] = {
+    chosen_word[1],
+    chosen_word[2],
+    chosen_word[3],
+    chosen_word[4],
+    chosen_word[5]
+}
+
+
+
+function validate_input(chosen_word, input)
+    local result = {}
+    for i=1, word_length do
+    end
+
+    return result
+
+end
 
 
 ----------------
@@ -35,6 +54,6 @@ function _draw()
         default_gap_size,
         word_length,
         num_tries,
-        rounds)
+        guesses)
 end
 
