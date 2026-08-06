@@ -18,6 +18,18 @@ function draw_tile(x, y, size, col, letter)
 
 end
 
+function tile_color(result_letter)
+    local tile_color
+    if result_letter == 'C' then
+        tile_color = 3
+    elseif result_letter == 'P' then
+        tile_color = 9
+    else
+        tile_color = 1
+    end
+    return tile_color
+
+end
 
 -- Draw entire board. Uses sizes & word length in main
 function draw_board(
@@ -25,7 +37,8 @@ function draw_board(
     gap_size,
     num_letters,
     num_tries,
-    guesses
+    guesses,
+    results
     )
     -- Define top-left corner to start the letters (Half block + 2 blocks)
     local start_x = 128/2-(rect_size/2)-(2*rect_size)-(2*gap_size)
@@ -35,11 +48,13 @@ function draw_board(
     -- For every vertical row
     for i=1, num_tries do
         local offset_x = 0
-        word = guesses[i] or {} -- Get word in this round if exists
+        word = guesses[i] or '' -- Get word in this round if exists
+        result = results[i]
         -- Create 5 tiles horizontally
         for i=1, num_letters do
             letter = word[i] or '' -- Get letter or leave empty
-            draw_tile(start_x + offset_x, start_y + offset_y, rect_size, 3, letter)
+            result_letter = sub(result, i, i)
+            draw_tile(start_x + offset_x, start_y + offset_y, rect_size, tile_color(result_letter), letter)
             offset_x += (rect_size + gap_size)
         end
         offset_y += (rect_size + gap_size)
