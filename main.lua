@@ -14,6 +14,7 @@ local guesses = {}
 chosen_word = select_word()
 -- Add testround
 guesses[1] = 'TABLE'
+word = ''
 
 
 ----------------
@@ -23,17 +24,25 @@ function _init()
 
 end
 
-
 function _update()
+    current_letter = get_current_letter()
+    
+    -- Add letter if button is pressed
+    if btnp(4) then
+        add_letter(word, current_letter, word_length)
+    end
+    
+end
+
+function _draw()
+    cls()
+    print("Current: "..current_letter, 0, 0, 7)
     print('Results')
     print('')
     print(validate_input(chosen_word, guesses[1]))
     print(chosen_word)
-end
-
-
-function _draw()
-    debug_rects() -- Debugging
+    print(word)
+    debug_rects()
     local results = {}
     results[1] = validate_input(chosen_word, guesses[1])
     draw_board(
@@ -44,4 +53,3 @@ function _draw()
         guesses,
         results)
 end
-
