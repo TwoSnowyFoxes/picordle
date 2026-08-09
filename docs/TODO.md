@@ -1,0 +1,13 @@
+# To do list
+- Add sound effects
+- Add background music while playing
+- Create background & improve visual style
+- Create a keyboard showing what letters are left
+- Add settings for different letter lengths & tries
+- Improve codebase, such as
+    - Add type hints to all functions & variables
+    - Clean up all naming of variables & functions
+    - Improve structuring into `.lua`-files
+    - Improve structuring of functions
+    - Save cart space where possible
+- Write documentation on codebase

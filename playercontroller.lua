@@ -23,10 +23,25 @@ end
 -- Num of guesses starts at 0. Increment after filling word
 guess = 0
 num_letters_in_word = 0
-word = ''
 function add_letter(word, current_letter, word_length)
     -- Add letter if word isn't 5 (word_length) long yet
-    if #word < word_length then
+    if #word < word_length and btnp(4) then
         word = word .. current_letter
+    end
+    return word
+end
+
+
+function delete_letter(word)
+    if btnp(5) then
+        word = sub(word, 1, #word - 1) 
+    end
+    return word
+end
+
+-- Input guess
+function do_a_guess(word, word_length, guesses, try)
+    if #word == word_length and btnp(5) then
+        guesses[try] = word
     end
 end
