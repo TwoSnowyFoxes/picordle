@@ -11,7 +11,7 @@ local default_gap_size = 2
 -- Make a table to save guesses to
 local guesses = {}
 -- Choose a word
-chosen_word = select_word()
+word_to_guess = select_word()
 -- Add testround
 guesses[1] = 'TABLE'
 guesses[2] = 'BALLS'
@@ -28,9 +28,10 @@ end
 function _update()
     current_letter = get_current_letter()
     
-    -- Add letter if button is pressed
+    -- Add/delete letter if button is pressed
     user_word = add_letter(user_word, current_letter, word_length)
     user_word = delete_letter(user_word)
+    do_a_guess()
     
 end
 
@@ -39,8 +40,8 @@ function _draw()
     print("Current: "..current_letter, 0, 0, 7)
     print('Results')
     print('')
-    print(validate_input(chosen_word, guesses[1]))
-    print(chosen_word)
+    print(validate_input(word_to_guess, guesses[1]))
+    print(word_to_guess)
 
     -- Draw user word
     print(user_word, 50, 80, 9)
@@ -51,7 +52,7 @@ function _draw()
     local results = {}
 
     -- Debug result
-    results[1] = validate_input(chosen_word, guesses[1])
+    results[1] = validate_input(word_to_guess, guesses[1])
     draw_board(
         default_tile_size,
         default_gap_size,

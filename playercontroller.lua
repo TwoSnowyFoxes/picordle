@@ -40,8 +40,9 @@ function delete_letter(word)
 end
 
 -- Input guess
-function do_a_guess(word, word_length, guesses, try)
-    if #word == word_length and btnp(5) then
-        guesses[try] = word
+function do_a_guess(user_word, word_length, guesses, results, try)
+    if #user_word == word_length and btnp(5) then
+        guesses[try] = user_word
+        results[try] = validate_input(word_to_guess, user_word)
     end
 end

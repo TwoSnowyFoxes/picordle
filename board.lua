@@ -48,13 +48,13 @@ function draw_board(
     -- For every vertical row
     for i=1, num_tries do
         local offset_x = 0
-        word = guesses[i] or '' -- Get word in this round if exists
-        result = results[i]
+        local user_word = guesses[i] or '' -- Get word in this round if exists
+        local result = results[i]
         -- Create 5 tiles horizontally
         for i=1, num_letters do
-            letter = word[i] or '' -- Get letter or leave empty
-            result_letter = sub(result, i, i)
-            draw_tile(start_x + offset_x, start_y + offset_y, rect_size, tile_color(result_letter), letter)
+            local user_letter = user_word[i] or '' -- Get letter or leave empty
+            local result_letter = sub(result, i, i)
+            draw_tile(start_x + offset_x, start_y + offset_y, rect_size, tile_color(result_letter), user_letter)
             offset_x += (rect_size + gap_size)
         end
         offset_y += (rect_size + gap_size)

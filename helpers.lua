@@ -8,15 +8,15 @@ function has_value(str, val)
 end
 
 
-function validate_input(chosen_word, input)
+function validate_input(word_to_guess, input)
     local result = ''
     for i=1, word_length do
-        local chosen_letter = sub(chosen_word, i, i)
+        local chosen_letter = sub(word_to_guess, i, i)
         local input_letter = sub(input, i, i)
 
         if input_letter == chosen_letter then
             result = result .. 'C' -- Correct
-        elseif has_value(chosen_word, input_letter) then
+        elseif has_value(word_to_guess, input_letter) then
             result = result .. 'P' -- Present
         else
             result = result .. 'W' -- Wrong
