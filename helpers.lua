@@ -8,15 +8,15 @@ function has_value(str, val)
 end
 
 
-function validate_input(word_to_guess, input)
+function validate_input(user_input)
     local result = ''
     for i=1, GAME.word_length do
-        local chosen_letter = sub(word_to_guess, i, i)
-        local input_letter = sub(input, i, i)
+        local chosen_letter = sub(GAME.word_to_guess, i, i)
+        local input_letter = sub(user_input, i, i)
 
         if input_letter == chosen_letter then
             result = result .. 'C' -- Correct
-        elseif has_value(word_to_guess, input_letter) then
+        elseif has_value(GAME.word_to_guess, input_letter) then
             result = result .. 'P' -- Present
         else
             result = result .. 'W' -- Wrong
@@ -30,8 +30,8 @@ end
 
 function check_win(results)
     local is_win = false
-    for i=1, #results do
-        if results[i] == 'CCCCC' then
+    for i=1, #GAME.results do
+        if GAME.results[i] == 'CCCCC' then
             is_win = true
         end
         -- Snap out of loop once we find win state

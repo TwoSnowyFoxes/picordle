@@ -1,8 +1,3 @@
-alphabet = {
-	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-	'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-}
-
 -- Start game on first letter
 current_letter = alphabet[1]
 index = 1
@@ -39,19 +34,19 @@ function delete_letter(word)
 end
 
 -- Input guess
-function do_a_guess(user_word, guesses, results)
+function do_a_guess(user_word)
     if #user_word ~= GAME.word_length then
         return false
     end
 
-    if not guesses then
-        guesses = {}
-    end
-    if not results then
-        results = {}
-    end
+    -- if not guesses then
+    --     guesses = {}
+    -- end
+    -- if not results then
+    --     results = {}
+    -- end
 
-    guesses[#guesses + 1] = user_word
-    results[#guesses] = validate_input(word_to_guess, user_word)
+    GAME.guesses[#GAME.guesses + 1] = user_word
+    GAME.results[#GAME.guesses] = validate_input(user_word)
     return true
 end

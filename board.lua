@@ -1,13 +1,13 @@
 -- Code for creating the letter boards
 
 -- Create debug rects in the corners for clarity
-function debug_rects()
-    local size = 2
-    rectfill(0, 0, size, size, 3)
-    rectfill(127 - size, 0, 127, size, 3)
-    rectfill(0, 127 - size, size, 127, 3)
-    rectfill(127 - size, 127 - size, 127, 127, 3)
-end
+-- function debug_rects()
+--     local size = 2
+--     rectfill(0, 0, size, size, 3)
+--     rectfill(127 - size, 0, 127, size, 3)
+--     rectfill(0, 127 - size, size, 127, 3)
+--     rectfill(127 - size, 127 - size, 127, 127, 3)
+-- end
 
 
 -- Draw a simple tile. No state held.
@@ -18,24 +18,22 @@ function draw_tile(x, y, size, col, letter)
 
 end
 
+-- Decide on the color to give each tile
 function tile_color(result_letter)
     local tile_color
-    if result_letter == 'C' then
-        tile_color = 3
-    elseif result_letter == 'P' then
-        tile_color = 9
+    if result_letter == RESULT_CODES.correct then
+        tile_color = TILE_COLORS.correct
+    elseif result_letter == RESULT_CODES.present then
+        tile_color = TILE_COLORS.present
     else
-        tile_color = 1
+        tile_color = TILE_COLORS.wrong
     end
     return tile_color
 
 end
 
 -- Draw entire board. Uses sizes & word length in main
-function draw_board(
-    guesses,
-    results
-    )
+function draw_board()
     -- Define top-left corner to start the letters (Half block + 2 blocks)
     local start_x = 128/2-(GAME.tile_size/2)-(2*GAME.tile_size)-(2*GAME.gap_size)
     local start_y = 128/3-(GAME.tile_size/2)-(2*GAME.tile_size)-(2*GAME.gap_size)
@@ -44,8 +42,8 @@ function draw_board(
     -- For every vertical row
     for i=1, GAME.num_tries do
         local offset_x = 0
-        local user_word = guesses[i] or '' -- Get word in this round if exists
-        local result = results[i]
+        local user_word = GAME.guesses[i] or '' -- Get word in this round if exists
+        local result = GAME.results[i]
         -- Create 5 tiles horizontally
         for i=1, GAME.word_length do
             local user_letter = user_word[i] or '' -- Get letter or leave empty

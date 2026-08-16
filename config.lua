@@ -1,13 +1,22 @@
 -- Centralized project constants
+
+-- All constants & values related to the game state
 GAME = {
     word_length = 5,
     num_tries = 5,
     tile_size = 10,
     gap_size = 2,
     board_x = 20,
-    board_y = 20
+    board_y = 20,
+    guesses = {},
+    results = {},
+    word_to_guess = '',
+    current_user_word = '',
+    current_user_letter = ''
+
 }
 
+-- color mapping for ease
 COLORS = {
     black = 0,
     dark_blue = 1,
@@ -27,6 +36,7 @@ COLORS = {
     peach = 15
 }
 
+-- Assign default tile colors
 TILE_COLORS = {
     correct = COLORS.green,
     present = COLORS.yellow,
@@ -34,6 +44,7 @@ TILE_COLORS = {
     empty = COLORS.black
 }
 
+-- Assign unique letters for validating letters
 RESULT_CODES = {
     correct = "C",
     present = "P",
