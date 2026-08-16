@@ -10,7 +10,7 @@ end
 
 function validate_input(word_to_guess, input)
     local result = ''
-    for i=1, word_length do
+    for i=1, GAME.word_length do
         local chosen_letter = sub(word_to_guess, i, i)
         local input_letter = sub(input, i, i)
 
@@ -29,12 +29,16 @@ end
 
 
 function check_win(results)
+    local is_win = false
     for i=1, #results do
         if results[i] == 'CCCCC' then
-            return true
-            --break
+            is_win = true
         end
+        -- Snap out of loop once we find win state
+        if is_win == true then break end
         
-        return false
     end
+
+    return is_win
+
 end

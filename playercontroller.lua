@@ -23,9 +23,9 @@ end
 -- Num of guesses starts at 0. Increment after filling word
 guess = 0
 num_letters_in_word = 0
-function add_letter(word, current_letter, word_length)
+function add_letter(word, current_letter)
     -- Add letter if word isn't full yet
-    if #word < word_length and btnp(4) then
+    if #word < GAME.word_length and btnp(4) then
         word = word .. current_letter
     end
     return word
@@ -39,8 +39,8 @@ function delete_letter(word)
 end
 
 -- Input guess
-function do_a_guess(user_word, word_length, guesses, results)
-    if #user_word ~= word_length then
+function do_a_guess(user_word, guesses, results)
+    if #user_word ~= GAME.word_length then
         return false
     end
 

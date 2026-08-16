@@ -1,4 +1,4 @@
-# To do list
+# To do list, ordered by priority
 - Show controls
 - Add sound effects
 - Add background music while playing
