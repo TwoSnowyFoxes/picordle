@@ -1,4 +1,5 @@
 # To do list
+- Show controls
 - Add sound effects
 - Add background music while playing
 - Create background & improve visual style

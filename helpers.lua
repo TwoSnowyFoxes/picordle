@@ -26,3 +26,15 @@ function validate_input(word_to_guess, input)
     return result
 
 end
+
+
+function check_win(results)
+    for i=1, #results do
+        if results[i] == 'CCCCC' then
+            return true
+            --break
+        end
+        
+        return false
+    end
+end

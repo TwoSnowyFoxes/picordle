@@ -24,25 +24,34 @@ end
 guess = 0
 num_letters_in_word = 0
 function add_letter(word, current_letter, word_length)
-    -- Add letter if word isn't 5 (word_length) long yet
+    -- Add letter if word isn't full yet
     if #word < word_length and btnp(4) then
         word = word .. current_letter
     end
     return word
 end
 
-
 function delete_letter(word)
-    if btnp(5) then
-        word = sub(word, 1, #word - 1) 
+    if btnp(0) and #word > 0 then
+        word = sub(word, 1, #word - 1)
     end
     return word
 end
 
 -- Input guess
-function do_a_guess(user_word, word_length, guesses, results, try)
-    if #user_word == word_length and btnp(5) then
-        guesses[try] = user_word
-        results[try] = validate_input(word_to_guess, user_word)
+function do_a_guess(user_word, word_length, guesses, results)
+    if #user_word ~= word_length then
+        return false
     end
+
+    if not guesses then
+        guesses = {}
+    end
+    if not results then
+        results = {}
+    end
+
+    guesses[#guesses + 1] = user_word
+    results[#guesses] = validate_input(word_to_guess, user_word)
+    return true
 end
