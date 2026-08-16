@@ -12,7 +12,9 @@ GAME = {
     results = {},
     word_to_guess = '',
     current_user_word = '',
-    current_user_letter = ''
+    current_user_letter = '',
+    has_won = false,
+    game_over = false
 
 }
 

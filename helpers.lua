@@ -28,7 +28,7 @@ function validate_input(user_input)
 end
 
 
-function check_win(results)
+function check_win()
     local is_win = false
     for i=1, #GAME.results do
         if GAME.results[i] == 'CCCCC' then

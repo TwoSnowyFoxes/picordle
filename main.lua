@@ -11,28 +11,34 @@ user_word = ''
 ----------------
 function _init()
 
-    -- Choose a word at the start of the game
+    -- Initialize gamestate
+    GAME.guesses = {}
+    GAME.results = {}
     GAME.word_to_guess = select_word()
+    GAME.current_user_word = ""
+    GAME.current_user_letter = alphabet[1]
+    GAME.has_won = false
+    GAME.game_over = false
 
 end
 
 function _update()
     -- Check win condition
-    has_won = check_win(results)
-    has_no_turns_left = GAME.num_tries == #GAME.guesses and not has_won
+    GAME.has_won = check_win()
+    GAME.game_over = GAME.num_tries == #GAME.guesses and not GAME.has_won
 
-    current_letter = get_current_letter()
+    GAME.current_user_letter = get_current_letter()
 
     -- Disable controls if user has already won
-    if not has_won then
+    if not GAME.has_won or GAME.game_over then
         -- Add a letter with O, delete with left arrow, and submit with X
-        user_word = add_letter(user_word, current_letter, GAME.word_length)
-        user_word = delete_letter(user_word)
+        GAME.current_user_word = add_letter(GAME.current_user_word, GAME.current_user_letter, GAME.word_length)
+        GAME.current_user_word = delete_letter(GAME.current_user_word)
 
         -- Do a guess
         if btnp(5) then
             if do_a_guess(user_word) then
-                user_word = ''
+                GAME.current_user_word = ''
             end
         end
     
@@ -42,24 +48,31 @@ end
 
 function _draw()
     cls()
-    print("Current: "..current_letter, 0, 0, 7)
-    print(GAME.word_to_guess, 0, 12, 7)
-
-    -- Draw the current typed word
-    print(user_word, 50, 80, 9)
-
-    for i=1, #results do
-        print(results[i])
-    end
-    print(has_won)
-    draw_board()
+    print("Current: "..GAME.current_user_letter, 0, 0, 7)
     
-    if has_won then
+    -- Draw the current typed word
+    print(GAME.current_user_word, 50, 80, 9)
+    draw_board()
+
+
+    -- Debug information
+    if btnp(1) then
+        print(GAME.word_to_guess, 0, 12, 7)
+        for i=1, #GAME.results do
+            print(GAME.results[i])
+        end
+        print(GAME.has_won)
+    
+    end
+
+    
+    -- Game end
+    if GAME.has_won then
         cls()
         print('You win!', 60, 60, 7)
     end
 
-    if has_no_turns_left then
+    if game_over then
         cls()
         print('You lose', 60, 60, 7)
     end
