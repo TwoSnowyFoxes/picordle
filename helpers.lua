@@ -35,8 +35,7 @@ function check_win()
             is_win = true
         end
         -- Snap out of loop once we find win state
-        if is_win == true then break end
-        
+        if is_win == true then break end 
     end
 
     return is_win

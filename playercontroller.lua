@@ -1,14 +1,13 @@
 -- Start game on first letter
-index = 1
 function get_current_letter()
     if btnp(2) then --up
-        index += 1
-        if index > #alphabet then index = 1 end  -- wrap around
-        GAME.current_user_letter = alphabet[index]
+        GAME.letter_index += 1
+        if GAME.letter_index > #alphabet then GAME.letter_index = 1 end  -- wrap around
+        GAME.current_user_letter = alphabet[GAME.letter_index]
     elseif btnp(3) then --down
-        index -= 1
-        if index < 1 then index = #alphabet end  -- wrap around
-         GAME.current_user_letter = alphabet[index]
+        GAME.letter_index -= 1
+        if GAME.letter_index < 1 then GAME.letter_index = #alphabet end  -- wrap around
+        GAME.current_user_letter = alphabet[GAME.letter_index]
     end
 
     return GAME.current_user_letter

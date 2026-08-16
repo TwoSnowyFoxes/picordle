@@ -1,11 +1,3 @@
--- Make tables to save guesses and their results
-guesses = {}
-results = {}
--- Choose a word
-
-user_word = ''
-
-
 ----------------
 -- Callback functions
 ----------------
@@ -17,31 +9,28 @@ function _init()
     GAME.word_to_guess = select_word()
     GAME.current_user_word = ""
     GAME.current_user_letter = alphabet[1]
+    GAME.letter_index = 1
     GAME.has_won = false
     GAME.game_over = false
 
 end
 
 function _update()
-    -- Check win condition
+    -- Check win & lose condition
     GAME.has_won = check_win()
-    GAME.game_over = GAME.num_tries == #GAME.guesses and not GAME.has_won
+    GAME.game_over = (#GAME.guesses >= GAME.num_tries) and not GAME.has_won
 
     GAME.current_user_letter = get_current_letter()
 
-    -- Disable controls if user has already won
-    if not GAME.has_won or GAME.game_over then
-        -- Add a letter with O, delete with left arrow, and submit with X
-        GAME.current_user_word = add_letter(GAME.current_user_word, GAME.current_user_letter, GAME.word_length)
-        GAME.current_user_word = delete_letter(GAME.current_user_word)
+    if not GAME.has_won and not GAME.game_over then
+        GAME.current_user_word = add_letter()
+        GAME.current_user_word = delete_letter()
 
-        -- Do a guess
         if btnp(5) then
-            if do_a_guess(user_word) then
-                GAME.current_user_word = ''
+            if do_a_guess() then
+                GAME.current_user_word = ""
             end
         end
-    
     end
 
 end
@@ -55,24 +44,23 @@ function _draw()
     draw_board()
 
 
-    -- Debug information
+    -- Draw debug information
     if btnp(1) then
         print(GAME.word_to_guess, 0, 12, 7)
         for i=1, #GAME.results do
             print(GAME.results[i])
         end
         print(GAME.has_won)
-    
     end
 
     
-    -- Game end
+    -- Draw game end screens
     if GAME.has_won then
         cls()
         print('You win!', 60, 60, 7)
     end
 
-    if game_over then
+    if GAME.game_over and not GAME.has_won then
         cls()
         print('You lose', 60, 60, 7)
     end
