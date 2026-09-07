@@ -16,10 +16,6 @@ function _init()
 end
 
 function _update()
-    -- Check win & lose condition
-    GAME.has_won = check_win()
-    GAME.game_over = (#GAME.guesses >= GAME.num_tries) and not GAME.has_won
-
     GAME.current_user_letter = get_current_letter()
 
     if not GAME.has_won and not GAME.game_over then
@@ -29,6 +25,8 @@ function _update()
         if btnp(5) then
             if do_a_guess() then
                 GAME.current_user_word = ""
+                GAME.has_won = check_win()
+                GAME.game_over = (#GAME.guesses >= GAME.num_tries) and not GAME.has_won
             end
         end
     end
@@ -36,6 +34,12 @@ function _update()
 end
 
 function _draw()
+    if GAME.has_won or GAME.game_over then
+        cls()
+        print(GAME.has_won and 'You win!' or 'You lose', 60, 60, 7)
+        return
+    end
+
     cls()
     print("Current: "..GAME.current_user_letter, 0, 0, 7)
     
@@ -54,15 +58,4 @@ function _draw()
     end
 
     
-    -- Draw game end screens
-    if GAME.has_won then
-        cls()
-        print('You win!', 60, 60, 7)
-    end
-
-    if GAME.game_over and not GAME.has_won then
-        cls()
-        print('You lose', 60, 60, 7)
-    end
-
 end
