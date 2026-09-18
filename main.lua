@@ -1,6 +1,9 @@
 ----------------
 -- Callback functions
 ----------------
+---
+--- INIT
+---
 function _init()
 
     -- Initialize gamestate
@@ -12,27 +15,27 @@ function _init()
     GAME.letter_index = 1
     GAME.has_won = false
     GAME.game_over = false
+    GAME.show_debug = false
 
 end
 
+
+---
+--- UPDATE
+---
 function _update()
-    GAME.current_user_letter = get_current_letter()
-
-    if not GAME.has_won and not GAME.game_over then
-        GAME.current_user_word = add_letter()
-        GAME.current_user_word = delete_letter()
-
-        if btnp(5) then
-            if do_a_guess() then
-                GAME.current_user_word = ""
-                GAME.has_won = check_win()
-                GAME.game_over = (#GAME.guesses >= GAME.num_tries) and not GAME.has_won
-            end
-        end
+    if GAME.has_won or GAME.game_over then
+        return
     end
 
+    handle_input()
+    if btnp(1) then GAME.show_debug = not GAME.show_debug end
 end
 
+
+---
+--- DRAW
+---
 function _draw()
     if GAME.has_won or GAME.game_over then
         cls()
@@ -49,7 +52,7 @@ function _draw()
 
 
     -- Draw debug information
-    if btnp(1) then
+    if GAME.show_debug then
         print(GAME.word_to_guess, 0, 12, 7)
         for i=1, #GAME.results do
             print(GAME.results[i])
@@ -57,5 +60,4 @@ function _draw()
         print(GAME.has_won)
     end
 
-    
 end

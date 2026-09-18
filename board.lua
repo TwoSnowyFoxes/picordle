@@ -19,7 +19,9 @@ end
 -- Decide on the color to give each tile
 function tile_color(result_letter)
     local tile_color
-    if result_letter == RESULT_CODES.correct then
+    if result_letter == '' then
+        tile_color = TILE_COLORS.empty
+    elseif result_letter == RESULT_CODES.correct then
         tile_color = TILE_COLORS.correct
     elseif result_letter == RESULT_CODES.present then
         tile_color = TILE_COLORS.present
@@ -43,7 +45,7 @@ function draw_board()
     for row=1, GAME.num_tries do
         local column_x = start_x
         local user_word = GAME.guesses[row] or '' -- Get word in this round if exists
-        local result = GAME.results[row]
+        local result = GAME.results[row] or ''
         -- Create 5 tiles horizontally
         for column=1, GAME.word_length do
             local user_letter = user_word[column] or '' -- Get letter or leave empty

@@ -28,18 +28,3 @@ function validate_input(user_input)
     return result
 
 end
-
-
-function check_win()
-    local is_win = false
-    for i=1, #GAME.results do
-        if GAME.results[i] == 'CCCCC' then
-            is_win = true
-        end
-        -- Snap out of loop once we find win state
-        if is_win == true then break end 
-    end
-
-    return is_win
-
-end
