@@ -1,5 +1,14 @@
 -- Centralized project constants
 
+CONTROLS = {
+    left = 0,
+    right = 1,
+    up = 2,
+    down = 3,
+    debug = 4,
+    submit = 5
+}
+
 -- All constants & values related to the game state
 GAME = {
     word_length = 5,
@@ -11,10 +20,11 @@ GAME = {
     guesses = {},
     results = {},
     word_to_guess = '',
-    current_user_word = '',
-    current_user_letter = '',
+    current_user_word = '_____',
+    cursor_index = 1,
     has_won = false,
-    game_over = false
+    game_over = false,
+    show_debug = false
 
 }
 
@@ -43,7 +53,7 @@ TILE_COLORS = {
     correct = COLORS.green,
     present = COLORS.yellow,
     wrong = COLORS.dark_gray,
-    empty = COLORS.black
+    empty = COLORS.light_gray
 }
 
 -- Assign unique letters for validating letters

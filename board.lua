@@ -1,5 +1,15 @@
 -- Code for creating the letter boards
 
+function draw_caret(x, y, down, col)
+    if down then
+        line(x, y, x + 2, y + 3, col)
+        line(x + 2, y + 3, x + 4, y, col)
+    else
+        line(x, y + 3, x + 2, y, col)
+        line(x + 2, y, x + 4, y + 3, col)
+    end
+end
+
 -- Create debug rects in the corners for clarity
 -- function debug_rects()
 --     local size = 2

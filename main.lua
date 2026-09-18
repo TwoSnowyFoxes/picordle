@@ -10,9 +10,8 @@ function _init()
     GAME.guesses = {}
     GAME.results = {}
     GAME.word_to_guess = select_word()
-    GAME.current_user_word = ""
-    GAME.current_user_letter = alphabet[1]
-    GAME.letter_index = 1
+    GAME.current_user_word = sub('_____', 1, GAME.word_length)
+    GAME.cursor_index = 1
     GAME.has_won = false
     GAME.game_over = false
     GAME.show_debug = false
@@ -29,9 +28,7 @@ function _update()
     end
 
     handle_input()
-    if btnp(1) then GAME.show_debug = not GAME.show_debug end
 end
-
 
 ---
 --- DRAW
@@ -44,14 +41,12 @@ function _draw()
     end
 
     cls()
-    print("Current: "..GAME.current_user_letter, 0, 0, 7)
-    
-    -- Draw the current typed word
     print(GAME.current_user_word, 50, 80, 9)
+    local cursor_x = 50 + (GAME.cursor_index - 1) * 4
+    draw_caret(cursor_x, 73, false, 9)
+    draw_caret(cursor_x, 88, true, 9)
     draw_board()
 
-
-    -- Draw debug information
     if GAME.show_debug then
         print(GAME.word_to_guess, 0, 12, 7)
         for i=1, #GAME.results do
